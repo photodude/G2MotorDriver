@@ -11,7 +11,7 @@ G2MotorDriver::G2MotorDriver()
 {
     // Pin Map
     _DIR = 2;
-    _PWM = 9;
+    _PWMPin = 9;
     _SLP = 4;
     _FLT = 6;
     _CS  = A0;
@@ -19,14 +19,14 @@ G2MotorDriver::G2MotorDriver()
 
 G2MotorDriver::G2MotorDriver(
             unsigned char DIR, //INA1,
-            unsigned char PWM,
+            unsigned char PWMPin,
             unsigned char SLP,
             unsigned char FLT, //EN1DIAG1,
             unsigned char CS)
 {
     // Pin Map
     _DIR = DIR;
-    _PWM = PWM;
+    _PWMPin = PWMPin;
     _SLP = SLP;
     _FLT = FLT;
     _CS  = CS;
@@ -37,7 +37,7 @@ void G2MotorDriver::init()
 {
     // Define pinMode for the pins
     pinMode(_DIR, OUTPUT);
-    pinMode(_PWM, OUTPUT);
+    pinMode(_PWMPin, OUTPUT);
     pinMode(_SLP, OUTPUT);
     digitalWrite(_SLP, HIGH); // SLP must be driven logic high to enable the driver.
     pinMode(_FLT, INPUT_PULLUP); // Output is driven low when a fault has occurred INPUT_PULLUP where HIGH means the sensor is off, and LOW means the sensor is on
@@ -45,7 +45,7 @@ void G2MotorDriver::init()
 
     // Set the frequency for timer1.
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
-    if (_PWM == _PWM_TIMER1_PIN)
+    if (_PWMPin == _PWM_TIMER1_PIN)
     {
         /**
          * Timer 1 configuration
@@ -78,16 +78,16 @@ void G2MotorDriver::setSpeed(int speed)
         speed = 400;
 
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
-    if (_PWM == _PWM_TIMER1_PIN)
+    if (_PWMPin == _PWM_TIMER1_PIN)
     {
         OCR1A = speed;
     }
     else
     {
-        analogWrite(_PWM, speed * 51 / 80); // map 400 to 255
+        analogWrite(_PWMPin, speed * 51 / 80); // map 400 to 255
     }
     #else
-        analogWrite(_PWM, speed * 51 / 80); // map 400 to 255
+        analogWrite(_PWMPin, speed * 51 / 80); // map 400 to 255
     #endif
 
     if (speed == 0)
@@ -118,16 +118,16 @@ void G2MotorDriver::setBrake(int brake)
         digitalWrite(_DIR, LOW);
 
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
-    if (_PWM == _PWM_TIMER1_PIN)
+    if (_PWMPin == _PWM_TIMER1_PIN)
     {
         OCR1A = brake;
     }
     else
     {
-        analogWrite(_PWM, brake * 51 / 80); // map 400 to 255
+        analogWrite(_PWMPin, brake * 51 / 80); // map 400 to 255
     }
     #else
-        analogWrite(_PWM, brake * 51 / 80); // map 400 to 255
+        analogWrite(_PWMPin, brake * 51 / 80); // map 400 to 255
     #endif
 }
 

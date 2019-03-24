@@ -30,7 +30,7 @@ class G2MotorDriver
         // User-defined pin selection.
         G2MotorDriver(
             unsigned char DIR, // INA1,
-            unsigned char PWM,
+            unsigned char PWMPin,
             unsigned char SLP, // Inverted sleep input: SLP must be driven logic high to enable the driver
             unsigned char FLT, // EN1DIAG1,
             unsigned char CS);
@@ -46,7 +46,7 @@ class G2MotorDriver
 
     private:
         unsigned char _DIR; //_INA1;
-        unsigned char _PWM;
+        unsigned char _PWMPin;
         unsigned char _SLP;
         static const unsigned char _PWM_TIMER1_PIN = 9;
         unsigned char _FLT; //_EN1DIAG1;
