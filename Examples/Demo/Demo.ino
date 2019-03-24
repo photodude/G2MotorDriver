@@ -43,7 +43,7 @@ void loop()
     stopIfFault();
     if (i%200 == 100)
     {
-      Serial.print("Motor  current: ");
+      Serial.print("Motor current: ");
       Serial.println(md.getCurrentMilliamps());
     }
     delay(2);
@@ -55,7 +55,7 @@ void loop()
     stopIfFault();
     if (i%200 == 100)
     {
-      Serial.print("Motor  current: ");
+      Serial.print("Motor current: ");
       Serial.println(md.getCurrentMilliamps());
     }
     delay(2);
