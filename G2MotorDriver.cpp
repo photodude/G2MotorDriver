@@ -153,5 +153,5 @@ void G2MotorDriver::Sleep()
 // Wake up the motor driver
 void G2MotorDriver::Wake()
 {
-    digitalWrite(_SLP, High); // SLP must be driven logic High to enable the driver and waking it up.
+    digitalWrite(_SLP, HIGH); // SLP must be driven logic High to enable the driver and waking it up.
 }
