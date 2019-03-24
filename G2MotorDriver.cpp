@@ -22,8 +22,7 @@ G2MotorDriver::G2MotorDriver(
             unsigned char PWM,
             unsigned char SLP,
             unsigned char FLT, //EN1DIAG1,
-            unsigned char CS,
-            )
+            unsigned char CS)
 {
     // Pin Map
     _DIR = DIR;
@@ -37,12 +36,12 @@ G2MotorDriver::G2MotorDriver(
 void G2MotorDriver::init()
 {
     // Define pinMode for the pins
-    pinMode(_DIR,OUTPUT);
-    pinMode(_PWM,OUTPUT);
-    pinMode(_SLP,OUTPUT);
+    pinMode(_DIR, OUTPUT);
+    pinMode(_PWM, OUTPUT);
+    pinMode(_SLP, OUTPUT);
     digitalWrite(_SLP, HIGH); // SLP must be driven logic high to enable the driver.
-    pinMode(_FLT,INPUT_PULLUP); // Output is driven low when a fault has occurred INPUT_PULLUP where HIGH means the sensor is off, and LOW means the sensor is on
-    pinMode(_CS,INPUT);
+    pinMode(_FLT, INPUT_PULLUP); // Output is driven low when a fault has occurred INPUT_PULLUP where HIGH means the sensor is off, and LOW means the sensor is on
+    pinMode(_CS, INPUT);
 
     // Set the frequency for timer1.
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
@@ -85,24 +84,24 @@ void G2MotorDriver::setSpeed(int speed)
     }
     else
     {
-        analogWrite(_PWM,speed * 51 / 80); // map 400 to 255
+        analogWrite(_PWM, speed * 51 / 80); // map 400 to 255
     }
     #else
-        analogWrite(_PWM,speed * 51 / 80); // map 400 to 255
+        analogWrite(_PWM, speed * 51 / 80); // map 400 to 255
     #endif
 
     if (speed == 0)
     {
-        digitalWrite(_DIR,LOW); // Make the motor coast no matter which direction it is spinning
+        digitalWrite(_DIR, LOW); // Make the motor coast no matter which direction it is spinning
                                 // DIR is low, current will flow from OUTB to OUTA.
     }
     else if (reverse)
     {
-        digitalWrite(_DIR,LOW); // DIR is low, current will flow from OUTB to OUTA.
+        digitalWrite(_DIR, LOW); // DIR is low, current will flow from OUTB to OUTA.
     }
     else
     {
-        digitalWrite(_DIR,HIGH); // DIR is high, current will flow from OUTA to OUTB
+        digitalWrite(_DIR, HIGH); // DIR is high, current will flow from OUTA to OUTB
     }
 }
 
@@ -125,10 +124,10 @@ void G2MotorDriver::setBrake(int brake)
     }
     else
     {
-        analogWrite(_PWM,brake * 51 / 80); // map 400 to 255
+        analogWrite(_PWM, brake * 51 / 80); // map 400 to 255
     }
     #else
-        analogWrite(_PWM,brake * 51 / 80); // map 400 to 255
+        analogWrite(_PWM, brake * 51 / 80); // map 400 to 255
     #endif
 }
 
@@ -142,5 +141,17 @@ unsigned int G2MotorDriver::getCurrentMilliamps()
 // Return error status for motor
 unsigned char G2MotorDriver::getFault()
 {
-  return !digitalRead(_FLT);
+    return !digitalRead(_FLT);
+}
+
+// Put the motor driver to sleep
+void G2MotorDriver::Sleep()
+{
+    digitalWrite(_SLP, LOW); // SLP must be driven logic low to disable the driver putting it to sleep.
+}
+
+// Wake up the motor driver
+void G2MotorDriver::Wake()
+{
+    digitalWrite(_SLP, High); // SLP must be driven logic High to enable the driver and waking it up.
 }
