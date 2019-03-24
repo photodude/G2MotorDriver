@@ -33,8 +33,7 @@ class G2MotorDriver
             unsigned char PWM,
             unsigned char SLP, // Inverted sleep input: SLP must be driven logic high to enable the driver
             unsigned char FLT, // EN1DIAG1,
-            unsigned char CS,
-            );
+            unsigned char CS);
 
         // PUBLIC METHODS
         void init(); // Initialize TIMER 1, set the PWM to 20kHZ.
