@@ -45,6 +45,8 @@ class G2MotorDriver
         void setBrake(int brake); // Brake for Motor.
         unsigned int getCurrentMilliamps(); // Get current reading for Motor.
         unsigned char getFault(); // Get fault reading from Motor.
+        void G2MotorDriver::Sleep(); // Put the motor driver to sleep
+        void G2MotorDriver::Wake(); // Wake up the motor driver
 
     private:
         unsigned char _DIR; //_INA1;
