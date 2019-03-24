@@ -6,9 +6,6 @@
  *         : 1 * 6.5 V to 30 V DC up to 40 Amp. external powersource for the brushed DC motor.
 **/
 
-#ifndef G2MotorDriver_h
-#define G2MotorDriver_h
-
 #pragma once
 
 #if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || \
@@ -45,8 +42,8 @@ class G2MotorDriver
         void setBrake(int brake); // Brake for Motor.
         unsigned int getCurrentMilliamps(); // Get current reading for Motor.
         unsigned char getFault(); // Get fault reading from Motor.
-        void G2MotorDriver::Sleep(); // Put the motor driver to sleep
-        void G2MotorDriver::Wake(); // Wake up the motor driver
+        void Sleep(); // Put the motor driver to sleep
+        void Wake(); // Wake up the motor driver
 
     private:
         unsigned char _DIR; //_INA1;
@@ -56,4 +53,3 @@ class G2MotorDriver
         unsigned char _FLT; //_EN1DIAG1;
         unsigned char _CS;
 };
-#endif
