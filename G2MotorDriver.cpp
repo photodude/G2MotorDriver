@@ -6,6 +6,8 @@
 #include "Arduino.h"
 #include "G2MotorDriver.h"
 
+boolean G2MotorDriver::_flip = false;
+
 // Constructors
 G2MotorDriver::G2MotorDriver()
 {
