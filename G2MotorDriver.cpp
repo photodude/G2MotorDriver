@@ -74,6 +74,7 @@ void G2MotorDriver::setSpeed(int speed)
         speed = -speed;  // Make speed a positive quantity
         reverse = 1;  // Preserve the direction
     }
+
     if (speed > 400)  // Max PWM dutycycle
         speed = 400;
 
@@ -90,7 +91,7 @@ void G2MotorDriver::setSpeed(int speed)
         analogWrite(_PWMPin, speed * 51 / 80); // map 400 to 255
     #endif
 
-    if (reverse)
+    if (reverse ^ _flip) // flip if speed was negative or _flip setting is active, but not both
     {
         digitalWrite(_DIR, HIGH); // DIR is high, current will flow from OUTA to OUTB
     }
@@ -98,6 +99,11 @@ void G2MotorDriver::setSpeed(int speed)
     {
         digitalWrite(_DIR, LOW); // DIR is low, current will flow from OUTB to OUTA.
     }
+}
+
+void G2MotorDriver::flip(boolean flip)
+{
+    G2MotorDriver::_flip = flip;
 }
 
 // Brake motor, brake is a number between 0 and 400
@@ -108,6 +114,7 @@ void G2MotorDriver::setBrake(int brake)
     {
         brake = -brake;
     }
+
     if (brake > 400)  // Max brake
         brake = 400;
         digitalWrite(_DIR, LOW);
@@ -126,11 +133,37 @@ void G2MotorDriver::setBrake(int brake)
     #endif
 }
 
-// Return motor current value in milliamps.
-unsigned int G2MotorDriver::getCurrentMilliamps()
+// Set voltage offset of Motor current reading at 0 speed.
+void G2MotorDriver::calibrateCurrentOffset()
 {
-    // 5V / 1024 ADC counts / 144 mV per A = 34 mA per count
-    return analogRead(_CS) * 34;
+  setSpeed(0);
+  Wake();
+  delay(1);
+  G2MotorDriver::_currentOffset = getCurrentReading();
+}
+
+unsigned int G2MotorDriver::getCurrentReading()
+{
+  return analogRead(_CS);
+}
+
+// Return motor current value in milliamps.
+unsigned int G2MotorDriver::getCurrentMilliamps(int gain)
+{
+    /**
+      * 5V / 1024 ADC counts / gain mV per A
+      * The 24v14, 18v18 and 24v18 results in 244 mA per count.
+      * The 18v22 results in 488 mA per count.
+    **/
+    unsigned int mAPerCount = 5000000/1024/gain;
+    int reading = (getCurrentReading() - G2MotorDriver::_currentOffset);
+
+    if (reading > 0)
+    {
+        return reading * mAPerCount;
+    }
+
+    return 0;
 }
 
 // Return error status for motor
