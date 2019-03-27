@@ -90,18 +90,13 @@ void G2MotorDriver::setSpeed(int speed)
         analogWrite(_PWMPin, speed * 51 / 80); // map 400 to 255
     #endif
 
-    if (speed == 0)
+    if (reverse)
     {
-        digitalWrite(_DIR, LOW); // Make the motor coast no matter which direction it is spinning
-                                // DIR is low, current will flow from OUTB to OUTA.
-    }
-    else if (reverse)
-    {
-        digitalWrite(_DIR, LOW); // DIR is low, current will flow from OUTB to OUTA.
+        digitalWrite(_DIR, HIGH); // DIR is high, current will flow from OUTA to OUTB
     }
     else
     {
-        digitalWrite(_DIR, HIGH); // DIR is high, current will flow from OUTA to OUTB
+        digitalWrite(_DIR, LOW); // DIR is low, current will flow from OUTB to OUTA.
     }
 }
 
