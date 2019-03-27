@@ -40,10 +40,16 @@ class G2MotorDriver
         void setSpeed(int speed); // Set speed for Motor.
         void setBrake(int brake); // Brake for Motor.
         unsigned int getCurrentMilliamps(); // Get current reading for Motor.
+		unsigned int getCurrentReading();
+		void calibrateCurrentOffset();
         unsigned char getFault(); // Get fault reading from Motor.
+		void flip(boolean flip); // Flip the direction of the speed for M1.
         void Sleep(); // Put the motor driver to sleep
         void Wake(); // Wake up the motor driver
 
+	protected:
+		unsigned int _currentOffset;
+	
     private:
         unsigned char _DIR; //_INA1;
         unsigned char _PWMPin;
@@ -51,4 +57,5 @@ class G2MotorDriver
         static const unsigned char _PWM_TIMER1_PIN = 9;
         unsigned char _FLT; //_EN1DIAG1;
         unsigned char _CS;
+		static boolean _flip;
 };
