@@ -11,7 +11,7 @@ Pololu G2 High-Power Motor Driver breakout board https://www.pololu.com/product/
 This is a library for the Arduino IDE that interfaces with the [Pololu G2 High-Power Motor Driver breakout board](https://www.pololu.com/product/2991).
 It makes it simple to drive one brushed DC motor.
 
-The library is highly influenced by the [Pololu Dual VNH5019 Motor Driver Shield](https://github.com/pololu/dual-vnh5019-motor-shield) with much of the code base and readme originating from that library. With that said extensive modifications have been made and many variable renamed to reflect use with the G2 High-Power Motor Driver breakout board
+The library is highly influenced by the [Pololu Dual VNH5019 Motor Driver Shield](https://github.com/pololu/dual-vnh5019-motor-shield) with much of the code base and readme originating from that library. Additional functions are based on the [dual-g2-high-power-motor-shield](https://github.com/pololu/dual-g2-high-power-motor-shield). With that said extensive modifications have been made and many variable renamed to reflect use with the G2 High-Power Motor Driver breakout board
 
 ## Supported platforms
 
