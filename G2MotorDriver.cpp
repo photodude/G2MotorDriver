@@ -184,4 +184,5 @@ void G2MotorDriver::Sleep()
 void G2MotorDriver::Wake()
 {
     digitalWrite(_SLP, HIGH); // SLP must be driven logic High to enable the driver and waking it up.
+	delay(1);  // The driver require a maximum of 1ms to elapse time when brought out of sleep mode.
 }
