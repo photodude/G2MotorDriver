@@ -23,7 +23,7 @@ void setup()
 
 	// Start up the library
 	md.init();
-	md.calibrateCurrentOffsets();
+	md.calibrateCurrentOffset();
 	delay(10);
 }
 
