@@ -29,8 +29,6 @@ void setup()
 
 void loop()
 {
-	md.Wake(); // Wake up the motor driver
-
 	for (int i = 0; i <= 400; i++)
 	{
 		md.setSpeed(i);
