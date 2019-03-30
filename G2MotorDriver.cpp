@@ -12,38 +12,38 @@ boolean G2MotorDriver::_flip = false;
 G2MotorDriver::G2MotorDriver()
 {
     // Pin Map
-    _DIR = 2;
+    _DIRPin = 2;
     _PWMPin = 9;
-    _SLP = 4;
-    _FLT = 6;
-    _CS  = A0;
+    _SLPPin = 4;
+    _FLTPin = 6;
+    _CSPin  = A0;
 }
 
 G2MotorDriver::G2MotorDriver(
-            unsigned char DIR, //INA1,
+            unsigned char DIRPin, //INA1,
             unsigned char PWMPin,
-            unsigned char SLP,
-            unsigned char FLT, //EN1DIAG1,
-            unsigned char CS)
+            unsigned char SLPPin,
+            unsigned char FLTPin, //EN1DIAG1,
+            unsigned char CSPin)
 {
     // Pin Map
-    _DIR = DIR;
+    _DIRPin = DIRPin;
     _PWMPin = PWMPin;
-    _SLP = SLP;
-    _FLT = FLT;
-    _CS  = CS;
+    _SLPPin = SLPPin;
+    _FLTPin = FLTPin;
+    _CSPin  = CSPin;
 }
 
 // Public Methods
 void G2MotorDriver::init()
 {
     // Define pinMode for the pins
-    pinMode(_DIR, OUTPUT);
+    pinMode(_DIRPin, OUTPUT);
     pinMode(_PWMPin, OUTPUT);
-    pinMode(_SLP, OUTPUT);
-    digitalWrite(_SLP, HIGH); // SLP must be driven logic high to enable the driver.
-    pinMode(_FLT, INPUT_PULLUP); // Output is driven low when a fault has occurred INPUT_PULLUP where HIGH means the sensor is off, and LOW means the sensor is on
-    pinMode(_CS, INPUT);
+    pinMode(_SLPPin, OUTPUT);
+    digitalWrite(_SLPPin, HIGH); // SLPPin must be driven logic high to enable the driver.
+    pinMode(_FLTPin, INPUT_PULLUP); // Output is driven low when a fault has occurred INPUT_PULLUP where HIGH means the sensor is off, and LOW means the sensor is on
+    pinMode(_CSPin, INPUT);
 
     // Set the frequency for timer1.
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
@@ -95,11 +95,11 @@ void G2MotorDriver::setSpeed(int speed)
 
     if (reverse ^ _flip) // flip if speed was negative or _flip setting is active, but not both
     {
-        digitalWrite(_DIR, HIGH); // DIR is high, current will flow from OUTA to OUTB
+        digitalWrite(_DIRPin, HIGH); // DIRPin is high, current will flow from OUTA to OUTB
     }
     else
     {
-        digitalWrite(_DIR, LOW); // DIR is low, current will flow from OUTB to OUTA.
+        digitalWrite(_DIRPin, LOW); // DIRPin is low, current will flow from OUTB to OUTA.
     }
 }
 
@@ -119,7 +119,7 @@ void G2MotorDriver::setBrake(int brake)
 
     if (brake > 400)  // Max brake
         brake = 400;
-        digitalWrite(_DIR, LOW);
+        digitalWrite(_DIRPin, LOW);
 
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
     if (_PWMPin == _PWM_TIMER1_PIN)
@@ -138,15 +138,15 @@ void G2MotorDriver::setBrake(int brake)
 // Set voltage offset of Motor current reading at 0 speed.
 void G2MotorDriver::calibrateCurrentOffset()
 {
-  setSpeed(0);
-  Wake();
-  delay(1);
-  G2MotorDriver::_currentOffset = getCurrentReading();
+    setSpeed(0);
+    Wake();
+    delay(1);
+    G2MotorDriver::_currentOffset = getCurrentReading();
 }
 
 unsigned int G2MotorDriver::getCurrentReading()
 {
-  return analogRead(_CS);
+    return analogRead(_CSPin);
 }
 
 // Return motor current value in milliamps.
@@ -172,46 +172,46 @@ unsigned int G2MotorDriver::getCurrentMilliamps(int gain)
 // Return error status for motor
 unsigned char G2MotorDriver::getFault()
 {
-    return !digitalRead(_FLT);
+    return !digitalRead(_FLTPin);
 }
 
 // Put the motor driver to sleep
 void G2MotorDriver::Sleep()
 {
-    digitalWrite(_SLP, LOW); // SLP must be driven logic low to disable the driver putting it to sleep.
+    digitalWrite(_SLPPin, LOW); // SLPPin must be driven logic low to disable the driver putting it to sleep.
 }
 
 // Wake up the motor driver
 void G2MotorDriver::Wake()
 {
-	digitalWrite(_SLP, HIGH); // SLP must be driven logic High to enable the driver and waking it up.
-	delay(1);  // The driver require a maximum of 1ms to elapse time when brought out of sleep mode.
+    digitalWrite(_SLPPin, HIGH); // SLPPin must be driven logic High to enable the driver and waking it up.
+    delay(1);  // The driver require a maximum of 1ms to elapse time when brought out of sleep mode.
 }
 
 // Return current value in milliamps for 18v17 version.
 unsigned int G2MotorDriver18v17::getCurrentMilliamps()
 {
-	int gainValue = 20;
-	return G2MotorDriver::getCurrentMilliamps(gainValue);
+    int gainValue = 20;
+    return G2MotorDriver::getCurrentMilliamps(gainValue);
 }
 
 // Return current value in milliamps for 18v25 version.
 unsigned int G2MotorDriver18v25::getCurrentMilliamps()
 {
-	int gainValue = 10;
-	return G2MotorDriver::getCurrentMilliamps(gainValue);
+    int gainValue = 10;
+    return G2MotorDriver::getCurrentMilliamps(gainValue);
 }
 
 // Return current value in milliamps for 24v13 version.
 unsigned int G2MotorDriver24v13::getCurrentMilliamps()
 {
-	int gainValue = 40;
-	return G2MotorDriver::getCurrentMilliamps(gainValue);
+    int gainValue = 40;
+    return G2MotorDriver::getCurrentMilliamps(gainValue);
 }
 
 // Return current value in milliamps for 24v21 version.
 unsigned int G2MotorDriver24v21::getCurrentMilliamps()
 {
-	int gainValue = 20;
-	return G2MotorDriver::getCurrentMilliamps(gainValue);
+    int gainValue = 20;
+    return G2MotorDriver::getCurrentMilliamps(gainValue);
 }
