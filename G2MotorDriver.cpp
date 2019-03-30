@@ -154,7 +154,7 @@ unsigned int G2MotorDriver::getCurrentMilliamps(int gain)
 {
     /**
       * 5V / 1024 ADC counts / gain mV per A
-	  * The 24v13 results in 122 mA per count.
+      * The 24v13 results in 122 mA per count.
       * The 18v17, and 24v21 results in 244 mA per count.
       * The 18v25 results in 488 mA per count.
     **/
