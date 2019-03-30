@@ -68,3 +68,27 @@ class G2MotorDriver18v17 : public G2MotorDriver
 		using G2MotorDriver::G2MotorDriver;
 		unsigned int getCurrentMilliamps(); // Get current reading for Motor with preset gain
 };
+
+// Additional prototypes for 18v25 version.
+class G2MotorDriver18v25 : public G2MotorDriver
+{
+	public:
+		using G2MotorDriver::G2MotorDriver;
+		unsigned int getCurrentMilliamps(); // Get current reading for Motor with preset gain
+};
+
+// Additional prototypes for 24v13 version.
+class G2MotorDriver24v13 : public G2MotorDriver
+{
+	public:
+		using G2MotorDriver::G2MotorDriver;
+		unsigned int getCurrentMilliamps(); // Get current reading for Motor with preset gain
+};
+
+// Additional prototypes for 24v21 version.
+class G2MotorDriver24v21 : public G2MotorDriver
+{
+	public:
+		using G2MotorDriver::G2MotorDriver;
+		unsigned int getCurrentMilliamps(); // Get current reading for Motor with preset gain
+};
