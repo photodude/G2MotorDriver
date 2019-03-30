@@ -1,18 +1,22 @@
 // Include the G2MotorDriver library
 #include "G2MotorDriver.h"
 
+// Uncomment the Initialize library version corresponding with the version of your breakout board
 // Initialize library
-G2MotorDriver md;
+G2MotorDriver18v17 md;
+//G2MotorDriver18v25 md;
+//G2MotorDriver24v13 md;
+//G2MotorDriver24v21 md;
 
 void stopIfFault()
 {
-  if (md.getFault())
-  {
-	md.Sleep(); // put the driver to sleep on fault
-	delay(1);
-	Serial.println("Motor fault");
-	while(1);
-  }
+	if (md.getFault())
+	{
+		md.Sleep(); // put the driver to sleep on fault
+		delay(1);
+		Serial.println("Motor fault");
+		while(1);
+	}
 }
 
 void setup()
@@ -36,7 +40,7 @@ void loop()
 		if (i%200 == 100)
 		{
 			Serial.print("Motor current: ");
-			Serial.println(md.getCurrentReading());
+			Serial.println(md.getCurrentMilliamps());
 		}
 		delay(2);
 	}
@@ -48,7 +52,7 @@ void loop()
 		if (i%200 == 100)
 		{
 			Serial.print("Motor current: ");
-			Serial.println(md.getCurrentReading());
+			Serial.println(md.getCurrentMilliamps());
 		}
 		delay(2);
 	}
@@ -60,7 +64,7 @@ void loop()
 		if (i%200 == 100)
 		{
 			Serial.print("Motor current: ");
-			Serial.println(md.getCurrentReading());
+			Serial.println(md.getCurrentMilliamps());
 		}
 		delay(2);
 	}
