@@ -66,5 +66,5 @@ class G2MotorDriver18v17 : public G2MotorDriver
 {
 	public:
 		using G2MotorDriver::G2MotorDriver;
-		unsigned int getCurrentMilliamps()// Get current reading for Motor
+		unsigned int getCurrentMilliamps(); // Get current reading for Motor with preset gain
 }
