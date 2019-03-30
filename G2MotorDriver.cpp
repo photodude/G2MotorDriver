@@ -41,7 +41,6 @@ void G2MotorDriver::init()
     pinMode(_DIRPin, OUTPUT);
     pinMode(_PWMPin, OUTPUT);
     pinMode(_SLPPin, OUTPUT);
-    digitalWrite(_SLPPin, HIGH); // SLPPin must be driven logic high to enable the driver.
     pinMode(_FLTPin, INPUT_PULLUP); // Output is driven low when a fault has occurred INPUT_PULLUP where HIGH means the sensor is off, and LOW means the sensor is on
     pinMode(_CSPin, INPUT);
 
