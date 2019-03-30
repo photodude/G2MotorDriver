@@ -11,7 +11,7 @@ void stopIfFault()
 	md.Sleep(); // put the driver to sleep on fault
 	delay(1);
 	Serial.println("Motor fault");
-    while(1);
+	while(1);
   }
 }
 
