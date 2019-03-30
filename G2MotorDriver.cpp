@@ -154,8 +154,9 @@ unsigned int G2MotorDriver::getCurrentMilliamps(int gain)
 {
     /**
       * 5V / 1024 ADC counts / gain mV per A
-      * The 24v14, 18v18 and 24v18 results in 244 mA per count.
-      * The 18v22 results in 488 mA per count.
+	  * The 24v13 results in 122 mA per count.
+      * The 18v17, and 24v21 results in 244 mA per count.
+      * The 18v25 results in 488 mA per count.
     **/
     unsigned int mAPerCount = 5000000/1024/gain;
     int reading = (getCurrentReading() - G2MotorDriver::_currentOffset);
@@ -183,12 +184,33 @@ void G2MotorDriver::Sleep()
 // Wake up the motor driver
 void G2MotorDriver::Wake()
 {
-    digitalWrite(_SLP, HIGH); // SLP must be driven logic High to enable the driver and waking it up.
+	digitalWrite(_SLP, HIGH); // SLP must be driven logic High to enable the driver and waking it up.
 	delay(1);  // The driver require a maximum of 1ms to elapse time when brought out of sleep mode.
 }
 
 // Return current value in milliamps for 18v17 version.
 unsigned int G2MotorDriver18v17::getCurrentMilliamps()
+{
+	int gainValue = 20;
+	return G2MotorDriver::getCurrentMilliamps(gainValue);
+}
+
+// Return current value in milliamps for 18v25 version.
+unsigned int G2MotorDriver18v25::getCurrentMilliamps()
+{
+	int gainValue = 10;
+	return G2MotorDriver::getCurrentMilliamps(gainValue);
+}
+
+// Return current value in milliamps for 24v13 version.
+unsigned int G2MotorDriver24v13::getCurrentMilliamps()
+{
+	int gainValue = 40;
+	return G2MotorDriver::getCurrentMilliamps(gainValue);
+}
+
+// Return current value in milliamps for 24v21 version.
+unsigned int G2MotorDriver24v21::getCurrentMilliamps()
 {
 	int gainValue = 20;
 	return G2MotorDriver::getCurrentMilliamps(gainValue);
