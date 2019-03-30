@@ -59,3 +59,12 @@ class G2MotorDriver
 		unsigned char _CS;
 		static boolean _flip;
 };
+
+
+// Additional prototypes for 18v17 version.
+class G2MotorDriver18v17 : public G2MotorDriver
+{
+	public:
+		using G2MotorDriver::G2MotorDriver;
+		unsigned int getCurrentMilliamps()// Get current reading for Motor
+}
