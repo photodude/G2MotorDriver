@@ -71,6 +71,14 @@ class G2MotorDriver
             static const unsigned char _PWM_TIMER2_PIN_A = 11;
             static const unsigned char _PWM_TIMER2_PIN_B = 3;
         #endif
+        #if defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega16U4__)
+            // Code in here will only be compiled if an Arduino Leonardo is used.
+            static const unsigned char _PWM_TIMER1_PIN_A = 9;
+            static const unsigned char _PWM_TIMER1_PIN_B = 10;
+            static const unsigned char _PWM_TIMER3_PIN_A = 5;
+            static const unsigned char _PWM_TIMER4_PIN_A = 13;
+            static const unsigned char _PWM_TIMER4_PIN_B = 6;
+        #endif
         #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
         // Code in here will only be compiled if an Arduino Mega is used.
             static const unsigned char _PWM_TIMER1_PIN_A = 11;
