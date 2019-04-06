@@ -49,14 +49,16 @@ void G2MotorDriver::init()
     if (_PWMPin == _PWM_TIMER1_PIN)
     {
         /**
-         * Timer 1 configuration
+         * Timer 1 Phase-Correct PWM configuration
          * prescaler: clockI/O / 1
          * outputs enabled
          * phase-correct PWM
          * top of 400
          * 
          * PWM frequency calculation
-         * 16MHz / 1 (prescaler) / 2 (phase-correct) / 400 (top) = 20kHz
+         * 16MHz / 1 (prescaler) / 2 (phase-correct) / 400 (top) = ~20kHz
+         *
+         * The Timer/Counter Control Registers TCCRnA and TCCRnB hold the main control bits for the timer.
         **/
         TCCR1A = 0b10100000;
         TCCR1B = 0b00010001;
@@ -82,6 +84,7 @@ void G2MotorDriver::setSpeed(int speed)
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
     if (_PWMPin == _PWM_TIMER1_PIN)
     {
+        // PWM timer counts from 0 to OCRnA the timer top limit (i.e. value of output compare register A) representing a duty cycle
         OCR1A = speed;
     }
     else
