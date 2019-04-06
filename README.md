@@ -1,7 +1,7 @@
 # Arduino library for the Pololu G2 High-Power Motor Driver breakout board
 
-Version: 0.0.1<br>
-Release Date: 2019-23-03<br>
+Version: 0.0.2<br>
+Release Date: 2019-04-06<br>
 [![Build Status](https://travis-ci.org/photodude/G2MotorDriver.svg?branch=master)](https://travis-ci.org/photodude/G2MotorDriver)<br>
 Pololu G2 High-Power Motor Driver breakout board https://www.pololu.com/product/2991<br>
 [www.pololu.com](https://www.pololu.com/)
