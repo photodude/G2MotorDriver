@@ -10,7 +10,16 @@
 
 #if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || \
     defined(__AVR_ATmega328PB__) || defined (__AVR_ATmega32U4__)
+// Timers generally available for all boards.
   #define G2MOTORDRIVER_TIMER1_AVAILABLE
+  #define G2MOTORDRIVER_TIMER2_AVAILABLE
+#endif
+
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+// Additional timmers for an Arduino Mega.
+  #define G2MOTORDRIVER_TIMER3_AVAILABLE
+  #define G2MOTORDRIVER_TIMER4_AVAILABLE
+  #define G2MOTORDRIVER_TIMER5_AVAILABLE
 #endif
 
 #include <Arduino.h>
@@ -29,10 +38,10 @@ class G2MotorDriver
 
         // User-defined pin selection.
         G2MotorDriver(
-            unsigned char DIRPin, // INA1,
+            unsigned char DIRPin,
             unsigned char PWMPin,
             unsigned char SLPPin, // Inverted sleep input: SLPPin must be driven logic high to enable the driver
-            unsigned char FLTPin, // EN1DIAG1,
+            unsigned char FLTPin,
             unsigned char CSPin);
 
         // PUBLIC METHODS
@@ -51,11 +60,33 @@ class G2MotorDriver
         unsigned int _currentOffset;
     
     private:
-        unsigned char _DIRPin; //_INA1
+        unsigned char _DIRPin;
         unsigned char _PWMPin;
+        #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
+            // Code in here will only be compiled if an Arduino Uno (or older) is used.
+            static const unsigned char _PWM_TIMER1_PIN_A = 9;
+            static const unsigned char _PWM_TIMER1_PIN_B = 10;
+            static const unsigned char _PWM_TIMER2_PIN_A = 11;
+            static const unsigned char _PWM_TIMER2_PIN_B = 3;
+        #endif
+        #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+        // Code in here will only be compiled if an Arduino Mega is used.
+            static const unsigned char _PWM_TIMER1_PIN_A = 11;
+            static const unsigned char _PWM_TIMER1_PIN_B = 12;
+            static const unsigned char _PWM_TIMER2_PIN_A = 10;
+            static const unsigned char _PWM_TIMER2_PIN_B = 9;
+            static const unsigned char _PWM_TIMER3_PIN_A = 5;
+            static const unsigned char _PWM_TIMER3_PIN_B = 2;
+            static const unsigned char _PWM_TIMER3_PIN_C = 3;
+            static const unsigned char _PWM_TIMER4_PIN_A = 6;
+            static const unsigned char _PWM_TIMER4_PIN_B = 7;
+            static const unsigned char _PWM_TIMER4_PIN_C = 8;
+            static const unsigned char _PWM_TIMER5_PIN_A = 46;
+            static const unsigned char _PWM_TIMER5_PIN_B = 45;
+            static const unsigned char _PWM_TIMER5_PIN_C = 44;
+        #endif
         unsigned char _SLPPin;
-        static const unsigned char _PWM_TIMER1_PIN = 9;
-        unsigned char _FLTPin; //_EN1DIAG1
+        unsigned char _FLTPin;
         unsigned char _CSPin;
         static boolean _flip;
 };
