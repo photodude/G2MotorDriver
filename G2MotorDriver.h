@@ -9,17 +9,18 @@
 #pragma once
 
 #if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || \
-    defined(__AVR_ATmega328PB__) || defined (__AVR_ATmega32U4__)
+    defined(__AVR_ATmega328PB__) || defined (__AVR_ATmega32U4__) || \
+    defined(__AVR_ATmega16U4__)
 // Timers generally available for all boards.
-  #define G2MOTORDRIVER_TIMER1_AVAILABLE
-  #define G2MOTORDRIVER_TIMER2_AVAILABLE
+    #define G2MOTORDRIVER_TIMER1_AVAILABLE
+    #define G2MOTORDRIVER_TIMER2_AVAILABLE
 #endif
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 // Additional timmers for an Arduino Mega.
-  #define G2MOTORDRIVER_TIMER3_AVAILABLE
-  #define G2MOTORDRIVER_TIMER4_AVAILABLE
-  #define G2MOTORDRIVER_TIMER5_AVAILABLE
+    #define G2MOTORDRIVER_TIMER3_AVAILABLE
+    #define G2MOTORDRIVER_TIMER4_AVAILABLE
+    #define G2MOTORDRIVER_TIMER5_AVAILABLE
 #endif
 
 #include <Arduino.h>
