@@ -87,7 +87,7 @@ void G2MotorDriver::setSpeed(int speed)
         // PWM timer counts from 0 to OCRnA the timer top limit (i.e. value of output compare register A) representing a duty cycle
         OCR1A = speed;
     }
-    elseif (_PWMPin == _PWM_TIMER1_PIN_B)
+    else if (_PWMPin == _PWM_TIMER1_PIN_B)
     {
         // PWM timer counts from 0 to OCRnB the timer top limit (i.e. value of output compare register B) representing a duty cycle
         OCR1B = speed;
@@ -133,7 +133,7 @@ void G2MotorDriver::setBrake(int brake)
     {
         OCR1A = brake;
     }
-    elseif (_PWMPin == _PWM_TIMER1_PIN_B)
+    else if (_PWMPin == _PWM_TIMER1_PIN_B)
     {
         OCR1B = brake;
     }
