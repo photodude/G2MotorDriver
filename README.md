@@ -112,7 +112,7 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
 |:---------:|:-------------:|:-------------:|:--------------:|:----------------:|
 |  Timer 1  |     OCR1A     |     16 bit    |        9       |   servo library  |
 |  Timer 1  |     OCR1B     |     16 bit    |       10       |   servo library  |
-|  Timer 2  |     OCR2A     |     8 bit     |       11       | tone(), notone() MOSI/SPI|
+|  Timer 2  |     OCR2A     |     8 bit     |       11       | tone(), notone(), MOSI/SPI |
 |  Timer 2  |     OCR2B     |     8 bit     |        3       | tone(), notone() |
 
 -   The Arduino Mega has 6 timers and 15 PWM outputs pins 2 to 13 and 44 to 46
@@ -125,16 +125,16 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
 
 | Mega Timer | Timer output OCRnx | Time bit mode | PWM pin output |     Conflicts    |
 |:----------:|:------------------:|:-------------:|:--------------:|:----------------:|
-|   Timer 1  |        OCR1A       |     16 bit    |       11       |                  |
-|   Timer 1  |        OCR1B       |     16 bit    |       12       |                  |
+|   Timer 1  |        OCR1A       |     16 bit    |       11       |         -        |
+|   Timer 1  |        OCR1B       |     16 bit    |       12       |         -        |
 |   Timer 2  |        OCR2A       |     8 bit     |       10       | tone(), notone() |
 |   Timer 2  |        OCR2B       |     8 bit     |        9       | tone(), notone() |
-|   Timer 3  |        OCR3A       |     16 bit    |        5       |                  |
-|   Timer 3  |        OCR3B       |     16 bit    |        2       |                  |
-|   Timer 3  |        OCR3C       |     16 bit    |        3       |                  |
-|   Timer 4  |        OCR4A       |     16 bit    |        6       |                  |
-|   Timer 4  |        OCR4B       |     16 bit    |        7       |                  |
-|   Timer 4  |        OCR4C       |     16 bit    |        8       |                  |
+|   Timer 3  |        OCR3A       |     16 bit    |        5       |         -        |
+|   Timer 3  |        OCR3B       |     16 bit    |        2       |         -        |
+|   Timer 3  |        OCR3C       |     16 bit    |        3       |         -        |
+|   Timer 4  |        OCR4A       |     16 bit    |        6       |         -        |
+|   Timer 4  |        OCR4B       |     16 bit    |        7       |         -        |
+|   Timer 4  |        OCR4C       |     16 bit    |        8       |         -        |
 |   Timer 5  |        OCR5A       |     16 bit    |       46       | servo library    |
 |   Timer 5  |        OCR5B       |     16 bit    |       45       | servo library    |
 |   Timer 5  |        OCR5C       |     16 bit    |       44       | servo library    |
