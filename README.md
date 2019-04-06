@@ -108,7 +108,7 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
     -   timer 1 —– Pins 9, 10 (servo library)
     -   timer 2 —– Pins 11, 3 (tone(), notone() functions)
 
-| Uno Timer | Timer output  | Time bit mode | PWM pin output |     Conflicts    |
+| Uno Timer | Timer output  | Timer bit mode | PWM pin output |     Conflicts    |
 |:---------:|:-------------:|:-------------:|:--------------:|:----------------:|
 |  Timer 1  |     OCR1A     |     16 bit    |        9       |   servo library  |
 |  Timer 1  |     OCR1B     |     16 bit    |       10       |   servo library  |
@@ -123,7 +123,7 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
     -   timer 4 —– pin 6, 7, 8
     -   timer 5 —– pin 44, 45, 46 (servo library)
 
-| Mega Timer | Timer output OCRnx | Time bit mode | PWM pin output |     Conflicts    |
+| Mega Timer | Timer output OCRnx | Timer bit mode | PWM pin output |     Conflicts    |
 |:----------:|:------------------:|:-------------:|:--------------:|:----------------:|
 |   Timer 1  |        OCR1A       |     16 bit    |       11       |         -        |
 |   Timer 1  |        OCR1B       |     16 bit    |       12       |         -        |
