@@ -63,9 +63,8 @@ class G2MotorDriver
     private:
         unsigned char _DIRPin;
         unsigned char _PWMPin;
-        #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__) || \
-            defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega16U4__)
-            // Code in here will only be compiled if an Arduino Uno (or older) or an Arduino Leonardo is used.
+        #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
+            // Code in here will only be compiled if an Arduino Uno (or older) is used.
             static const unsigned char _PWM_TIMER1_PIN_A = 9;
             static const unsigned char _PWM_TIMER1_PIN_B = 10;
             static const unsigned char _PWM_TIMER2_PIN_A = 11;
