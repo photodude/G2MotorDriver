@@ -13,7 +13,7 @@ G2MotorDriver::G2MotorDriver()
 {
     // Pin Map
     _DIRPin = 2;
-    _PWMPin = 9;
+    _PWMPin = 9; // default PWM on Timer 1 for Uno all other boards or pins need to be mapped
     _SLPPin = 4;
     _FLTPin = 6;
     _CSPin  = A0;
@@ -46,7 +46,7 @@ void G2MotorDriver::init()
 
     // Set the frequency for timer1.
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
-    if (_PWMPin == _PWM_TIMER1_PIN)
+    if (_PWMPin == _PWM_TIMER1_PIN_A || _PWMPin == _PWM_TIMER1_PIN_B)
     {
         /**
          * Timer 1 Phase-Correct PWM configuration
@@ -82,10 +82,15 @@ void G2MotorDriver::setSpeed(int speed)
         speed = 400;
 
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
-    if (_PWMPin == _PWM_TIMER1_PIN)
+    if (_PWMPin == _PWM_TIMER1_PIN_A)
     {
         // PWM timer counts from 0 to OCRnA the timer top limit (i.e. value of output compare register A) representing a duty cycle
         OCR1A = speed;
+    }
+    elseif (_PWMPin == _PWM_TIMER1_PIN_B)
+    {
+        // PWM timer counts from 0 to OCRnB the timer top limit (i.e. value of output compare register B) representing a duty cycle
+        OCR1B = speed;
     }
     else
     {
@@ -124,9 +129,13 @@ void G2MotorDriver::setBrake(int brake)
         digitalWrite(_DIRPin, LOW);
 
     #ifdef G2MOTORDRIVER_TIMER1_AVAILABLE
-    if (_PWMPin == _PWM_TIMER1_PIN)
+    if (_PWMPin == _PWM_TIMER1_PIN_A)
     {
         OCR1A = brake;
+    }
+    elseif (_PWMPin == _PWM_TIMER1_PIN_B)
+    {
+        OCR1B = brake;
     }
     else
     {
