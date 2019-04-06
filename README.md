@@ -139,7 +139,7 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
 |   Timer 5  |        OCR5B       |     16 bit    |       45       | servo library    |
 |   Timer 5  |        OCR5C       |     16 bit    |       44       | servo library    |
 
--   The Arduino Leonardo has 5 timers and 7 PWM outputs pins 2 to 13 and 44 to 46
+-   The Arduino Leonardo has 4 timers and 7 PWM outputs 
     -   timer 0 —– Pins 3, 11 (time functions like millis(), and delay() )
     -   timer 1 —– Pins 9, 10 (servo library)
     -   timer 3 —– pin 5
