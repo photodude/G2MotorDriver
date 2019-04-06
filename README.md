@@ -106,7 +106,15 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
 -   The Uno has 3 Timers and 6 PWM output pins 3, 5, 6, 9, 10, and 11
     -   timer 0 —– Pins 5, 6 (time functions like millis(), and delay() )
     -   timer 1 —– Pins 9, 10 (servo library)
-    -   timer 2 —– Pins 11, 3
+    -   timer 2 —– Pins 11, 3 (tone(), notone() functions)
+
+| Uno Timer | Timer output  | Time bit mode | PWM pin output |     Conflicts    |
+|:---------:|:-------------:|:-------------:|:--------------:|:----------------:|
+|  Timer 1  |     OCR1A     |     16 bit    |        9       |   servo library  |
+|  Timer 1  |     OCR1B     |     16 bit    |       10       |   servo library  |
+|  Timer 2  |     OCR2A     |     8 bit     |       11       | tone(), notone() MOSI/SPI|
+|  Timer 2  |     OCR2B     |     8 bit     |        3       | tone(), notone() |
+
 -   The Arduino Mega has 6 timers and 15 PWM outputs pins 2 to 13 and 44 to 46
     -   timer 0 —– pin 4, 13 (time functions like millis(), and delay() )
     -   timer 1 —– pin 11, 12
@@ -114,4 +122,21 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
     -   timer 3 —– pin 2, 3, 5
     -   timer 4 —– pin 6, 7, 8
     -   timer 5 —– pin 44, 45, 46 (servo library)
+
+| Mega Timer | Timer output OCRnx | Time bit mode | PWM pin output |     Conflicts    |
+|:----------:|:------------------:|:-------------:|:--------------:|:----------------:|
+|   Timer 1  |        OCR1A       |     16 bit    |       11       |                  |
+|   Timer 1  |        OCR1B       |     16 bit    |       12       |                  |
+|   Timer 2  |        OCR2A       |     8 bit     |       10       | tone(), notone() |
+|   Timer 2  |        OCR2B       |     8 bit     |        9       | tone(), notone() |
+|   Timer 3  |        OCR3A       |     16 bit    |        5       |                  |
+|   Timer 3  |        OCR3B       |     16 bit    |        2       |                  |
+|   Timer 3  |        OCR3C       |     16 bit    |        3       |                  |
+|   Timer 4  |        OCR4A       |     16 bit    |        6       |                  |
+|   Timer 4  |        OCR4B       |     16 bit    |        7       |                  |
+|   Timer 4  |        OCR4C       |     16 bit    |        8       |                  |
+|   Timer 5  |        OCR5A       |     16 bit    |       46       | servo library    |
+|   Timer 5  |        OCR5B       |     16 bit    |       45       | servo library    |
+|   Timer 5  |        OCR5C       |     16 bit    |       44       | servo library    |
+
 -   [You can manually implement a sudo PWM on any digital pin by repeatedly turning the pin on and off for the desired times](http://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM)
