@@ -10,7 +10,8 @@
 
 #if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || \
     defined(__AVR_ATmega328PB__) || defined (__AVR_ATmega32U4__) || \
-    defined(__AVR_ATmega16U4__)
+    defined(__AVR_ATmega16U4__) || defined(__AVR_ATmega1280__) || \
+    defined(__AVR_ATmega2560__)
 // Timers generally available for all boards.
     #define G2MOTORDRIVER_TIMER1_AVAILABLE
     #define G2MOTORDRIVER_TIMER2_AVAILABLE
