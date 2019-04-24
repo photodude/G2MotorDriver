@@ -117,11 +117,13 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
 
 -   The Arduino Mega has 6 timers and 15 PWM outputs pins 2 to 13 and 44 to 46
     -   timer 0 —– pin 4, 13 (time functions like millis(), and delay() )
+      - Note on Pin 13 and timers. Pin 13 is on Timer 0 by default and the timer 1 connection is disabled by default on the chip. Arduino does not support setting Pin 13 to timer 1 in core. There are big limitations to changing this, in generall it's recommended to use and I^2C PWM extender if you need more PWM pins with control over the PWM frequency.
     -   timer 1 —– pin 11, 12
     -   timer 2 —– pin 9, 10 (tone(), notone() functions)
     -   timer 3 —– pin 2, 3, 5
     -   timer 4 —– pin 6, 7, 8
     -   timer 5 —– pin 44, 45, 46 (servo library)
+    -   [Pin Map reference for Mega](https://www.arduino.cc/en/Hacking/PinMapping2560)
 
 | Mega Timer | Timer output OCRnx | Timer bit mode | PWM pin output |     Conflicts    |
 |:----------:|:------------------:|:-------------:|:--------------:|:----------------:|
