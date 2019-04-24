@@ -77,6 +77,7 @@ On other boards, this library uses `analogWrite` to generate PWM signals, which 
 
 ## Version history
 
+* 0.0.2 (2019-04-06): minor bug fixes and update to basing library off the Dual G2 library
 * 0.0.1 (2019-23-03): untested alpha release.
 
 ### Notes about timers and conflicts:
